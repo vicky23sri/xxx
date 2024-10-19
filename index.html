@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Street View</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4 py-4">
+    <div class="w-full max-w-4xl">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">Google Street View</h1>
+        <div id="street-view" class="w-full h-96 rounded-lg shadow-lg"></div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU9z_GS17qloEe5q60IUGvGsyUF9gRbw8&callback=initialize" async defer></script>
+    <script>
+        function initialize() {
+            const fenway = { lat: 42.345573, lng: -71.098326 };
+            const map = new google.maps.Map(document.getElementById("street-view"), {
+                center: fenway,
+                zoom: 14,
+            });
+            const panorama = new google.maps.StreetViewPanorama(
+                document.getElementById("street-view"),
+                {
+                    position: fenway,
+                    pov: {
+                        heading: 34,
+                        pitch: 10,
+                    },
+                }
+            );
+            map.setStreetView(panorama);
+        }
+    </script>
+</body>
+</html>
